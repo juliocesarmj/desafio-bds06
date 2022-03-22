@@ -1,8 +1,5 @@
 package com.devsuperior.movieflix.services;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +21,13 @@ public class ReviewService {
 	@Autowired
 	private AuthService authService;
 
-	public void newReview(ReviewPostDto reviewPostDto) {
+	public ReviewDTO newReview(ReviewPostDto reviewPostDto) {
 		Review review = new Review();
 		review.setText(reviewPostDto.getText());
 		review.setMovie(this.movieService.findMovie(reviewPostDto.getMovieId()));
 		User user = this.authService.authenticated();
 		review.setUser(user);
 		this.reviewRepository.save(review);
-	}
-
-	public List<ReviewDTO> findReview(Long movieId) {
-		return this.reviewRepository.findByMovieId(movieId).stream().map(ReviewDTO::new).collect(Collectors.toList());
+		return new ReviewDTO(review);
 	}
 }

@@ -109,14 +109,14 @@ public class ReviewResourceIT {
 		
 		result.andExpect(status().isCreated());
 		
-		result.andExpect(jsonPath("$[0].id").isNotEmpty());
-		result.andExpect(jsonPath("$[0].text").value(reviewText));
-		result.andExpect(jsonPath("$[0].movieId").value(movieId));
+		result.andExpect(jsonPath("$.id").isNotEmpty());
+		result.andExpect(jsonPath("$.text").value(reviewText));
+		result.andExpect(jsonPath("$.movieId").value(movieId));
 		
-		result.andExpect(jsonPath("$[0].userDto").isNotEmpty());
-		result.andExpect(jsonPath("$[0].userDto.id").isNotEmpty());
-		result.andExpect(jsonPath("$[0].userDto.name").isNotEmpty());
-		result.andExpect(jsonPath("$[0].userDto.email").value(memberUsername));
+		result.andExpect(jsonPath("$.userDto").isNotEmpty());
+		result.andExpect(jsonPath("$.userDto.id").isNotEmpty());
+		result.andExpect(jsonPath("$.userDto.name").isNotEmpty());
+		result.andExpect(jsonPath("$.userDto.email").value(memberUsername));
 	}
 
 	@Test

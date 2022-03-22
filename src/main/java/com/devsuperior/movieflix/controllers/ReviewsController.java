@@ -1,7 +1,5 @@
 package com.devsuperior.movieflix.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +24,7 @@ public class ReviewsController {
 		
 	@PostMapping 
 	@PreAuthorize("hasAnyRole('ROLE_MEMBER')")
-	public ResponseEntity<List<ReviewDTO>> newReview(@Valid @RequestBody ReviewPostDto reviewPostDto) {
-		this.reviewService.newReview(reviewPostDto);
-		return ResponseEntity.status(HttpStatus.CREATED).body(this.reviewService.findReview(reviewPostDto.getMovieId()));
+	public ResponseEntity<ReviewDTO> newReview(@Valid @RequestBody ReviewPostDto reviewPostDto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(this.reviewService.newReview(reviewPostDto));
 	}
 }
